@@ -60,24 +60,28 @@ def recursive_binary_search(sequence, number, left, right):
     # else:
     #     return None
 
-    left, right = (0, len(sequence) - 1)
+    while left > right:
+        return  None
+
+    middle = (right + left) // 2
 
     while left <= right:
-        middle = (right + left) // 2
+
         if number < sequence[middle]:
             return recursive_binary_search(sequence, number, left,  middle - 1)
         elif number > sequence[middle]:
-            return recursive_binary_search(sequence, number, middle + 1,right)
+            return recursive_binary_search(sequence, number, middle + 1, right)
         else:
             return middle
     return None
+    # asymptoticka zlozitost je O(log*n) - vyhoda
 
 def main(file_name, number):
     sequence = read_data(file_name=file_name, key="ordered_numbers")
     print(sequence)
     # iterative binary search
-    left = sequence[0]
-    right = sequence[-1]
+    left = 0
+    right = len(sequence) - 1
     print(binary_search(sequence, number=my_number))
     print(recursive_binary_search(sequence,my_number,left, right))
 
